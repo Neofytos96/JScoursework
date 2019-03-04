@@ -1,0 +1,29 @@
+#em {
+    width: 20px;
+
+
+}
+#noc{
+    margin-left: 30px;
+}
+
+#ey {
+    width: 35px;
+    margin-left:5px;
+}
+
+#sc{
+    margin-left: 100px;
+    width: 40px;
+}
+#form{
+    margin-left: 20px;
+    width: 400px;
+    padding: 20px;
+}
+
+body{
+    background-image: url("white.jpg");
+    background-size: cover;
+    background-attachment:fixed;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Card Payment </title>
+    <link rel="stylesheet" type="text/css" href="cardPayment.css">
+
+</head>
+<body>
+<h1>Online Payment Form</h1>
+<form id="form" onsubmit="return myFunction()" ><fieldset><legend>Payment Information</legend>
+    Card Number: &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;Name on card:<br>
+    <input type="text" onsubmit="myFunction()"
+           name="Card Number" id="cn" onfocus="focusCardNumber()" onblur="blurEvent()"  >
+     <input type="text" onsubmit="myFunction()" onfocus="focusCardName()" onblur="blurEvent()"
+            name="Name On Card" id="noc" ><br>
+    Expiration date: &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;Security Code:<br>
+    <input type="text" onsubmit="myFunction()" onfocus="focusExpireDate()"
+           name="Expiration Month" id="em" placeholder="MM" onblur="blurEvent()" > /
+    <input type="text" onsubmit="myFunction()" onfocus="focusExpireDate()"
+           name="Expiration Year" id="ey" placeholder="YYYY" onblur="blurEvent()">
+     <input type="text" onsubmit="myFunction()" onfocus="focusSecurityCode()"
+            name="Security Code" id="sc" onblur="blurEvent()" >
+    <br> <input type="submit" value="Submit">
+</fieldset></form>
+
+<script>
+
+    function myFunction() {
+        cardnumber = document.getElementById("cn").value;
+        var pattern = new RegExp("^\\d{16}$");
+        var patternDate = new RegExp("\\d{1}$|^\\d{2}$");
+        var patternYear = new RegExp("^\\d{4}$");
+        var patternSC = new RegExp("^\\d{3}$");
+        var patternName = new RegExp(/^[a-zA-Z]+$/);
+        cardname = document.getElementById("noc").value;
+        datemonth = document.getElementById("em").value;
+        dateyear = document.getElementById("ey").value;
+        securityCode = document.getElementById("sc").value;
+
+        if (!pattern.test(cardnumber.replace(" ", ""))) {
+             alert("Invalid number");
+             return false;
+    }
+         else if ((cardname.length === 0)|| !patternName.test(cardname)) {
+                alert("Invalid cardholder name");
+                return false;
+        }
+         else if (datemonth.length===0 || !patternDate.test(datemonth)
+            || parseInt(datemonth)>12 || parseInt(datemonth)<0 ){
+            alert("Invalid month");
+            return false;
+        }
+        else if (dateyear.length===0 || !patternYear.test(dateyear)|| parseInt(dateyear)<2018){
+             alert("invalid year");
+            return false;
+        }
+        else if (securityCode.length===0 || !patternSC.test(securityCode) || (securityCode < 1)){
+             alert("Invalid security code");
+            return false;
+        }
+
+        document.writeln("Thank you! Your order has been placed")
+
+    }
+
+    function blurEvent() {
+        document.getElementById("tip").innerHTML = "";
+
+    }
+
+    function focusCardNumber() {
+        document.getElementById("tip").innerHTML = "Enter the 16 digit number found on your card";
+
+    }
+
+    function focusCardName() {
+        document.getElementById("tip").innerHTML = "Enter the name found on your card. It is located below the 16 digit number";
+
+    }
+
+    function focusExpireDate() {
+        document.getElementById("tip").innerHTML = "Enter the date that your card expires. It is the date that your card expires";
+
+    }
+
+    function focusSecurityCode() {
+        document.getElementById("tip").innerHTML = "Enter 3 digit code found at the back of your card";
+
+    }
+
+
+</script>
+<div id="tip"></div>
+</body>
+</html>
+
